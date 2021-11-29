@@ -176,23 +176,15 @@ class Player(pg.sprite.Sprite):
 class Game(object):
     """Controls entire game"""
     def __init__(self):
-        self.screen = self.setup_pygame()
+        pg.init()
+        pg.display.set_caption('Walking Demo')
+        self.screen = pg.display.set_mode((800, 600))
         self.screen_rect = self.screen.get_rect()
         self.player_group = self.create_player()
         self.clock = pg.time.Clock()
         self.fps = 60
         self.done = False
         self.current_time = 0.0
-
-
-    def setup_pygame(self):
-        """Initializes pygame and produces a surface to blit on"""
-        pg.init()
-        pg.display.set_caption('Walking Demo')
-        screen = pg.display.set_mode((800, 600))
-
-        return screen
-
 
     def create_player(self):
         """Creates a player to control"""
