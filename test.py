@@ -134,11 +134,11 @@ class Player(pg.sprite.Sprite):
     def update(self, current_time):
         """Updates player state"""
         self.current_time = current_time
-        self.handle_input()
+        self.get_keys()
         state_function = self.state_dict[self.state]
         state_function()
 
-    def handle_input(self):
+    def get_keys(self):
         """Handle's user input"""
 
         keys = pg.key.get_pressed()
