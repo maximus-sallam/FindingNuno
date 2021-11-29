@@ -8,8 +8,8 @@ from tilemap import *
 class Game(object):
     def __init__(self):
         pg.init()
-        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
+        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         self.clock = pg.time.Clock()
         self.load_data()
 
@@ -21,7 +21,6 @@ class Game(object):
         self.player_image_up = pg.image.load(path.join(img_folder, PLAYER_IMAGE_UP))
         self.player_image_left = pg.image.load(path.join(img_folder, PLAYER_IMAGE_LEFT))
         self.player_image_right = pg.image.load(path.join(img_folder, PLAYER_IMAGE_RIGHT))
-
 
     def new(self):
         # initialize all variables and do all the setup for a new game
