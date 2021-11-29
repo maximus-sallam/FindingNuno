@@ -84,20 +84,20 @@ class Player(pg.sprite.Sprite):
             self.image = self.game.player_image_left
             self.vel.x = -PLAYER_SPEED
 
-        if keys[pg.K_RIGHT] or keys[pg.K_d]:
+        elif keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.image = self.game.player_image_right
             self.vel.x = PLAYER_SPEED
 
-        if keys[pg.K_UP] or keys[pg.K_w]:
+        elif keys[pg.K_UP] or keys[pg.K_w]:
             self.image = self.game.player_image_up
             self.vel.y = -PLAYER_SPEED
 
-        if keys[pg.K_DOWN] or keys[pg.K_s]:
+        elif keys[pg.K_DOWN] or keys[pg.K_s]:
             self.image = self.game.player_image_down
             self.vel.y = PLAYER_SPEED
 
-        if self.vel.x != 0 and self.vel.y != 0:
-            self.vel *= 0.7071
+#        if self.vel.x != 0 and self.vel.y != 0:
+#            self.vel *= 0.7071
 
     def collide_with_walls(self, direction):
         if direction == "x":

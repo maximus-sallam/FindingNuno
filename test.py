@@ -140,16 +140,16 @@ class Player(pg.sprite.Sprite):
 
     def handle_input(self, keys):
         """Handle's user input"""
-        if keys[pg.K_UP]:
+        if keys[pg.K_UP] or keys[pg.K_w]:
             self.state = 'walking_up'
             self.direction = 'up'
-        elif keys[pg.K_RIGHT]:
+        elif  keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.state = 'walking_right'
             self.direction = 'right'
-        elif keys[pg.K_LEFT]:
+        elif keys[pg.K_LEFT] or keys[pg.K_a]:
             self.state = 'walking_left'
             self.direction = 'left'
-        elif keys[pg.K_DOWN]:
+        elif keys[pg.K_DOWN] or keys[pg.K_s]:
             self.state = 'walking_down'
             self.direction = 'down'
         else:
