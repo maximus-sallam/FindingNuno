@@ -19,7 +19,8 @@ class Game(object):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, "img")
         self.map = Map(path.join(game_folder, "map.txt"))
-        self.wall_image = WALL_IMAGE
+        self.wall_image = pg.image.load(path.join(img_folder, WALL_IMAGE))
+        self.wall_image = pg.transform.scale(self.wall_image, (TILESIZE, TILESIZE))
         self.player_image_down = pg.image.load(path.join(img_folder, PLAYER_IMAGE_DOWN))
         self.player_image_up = pg.image.load(path.join(img_folder, PLAYER_IMAGE_UP))
         self.player_image_left = pg.image.load(path.join(img_folder, PLAYER_IMAGE_LEFT))
