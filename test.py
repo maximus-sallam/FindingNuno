@@ -15,7 +15,6 @@ class Player(pg.sprite.Sprite):
         self.image = self.image_list[self.image_index]
         self.rect = self.image.get_rect(x=x, y=y)
         self.state_dict = self.create_state_dict()
-        self.state = "resting"
         self.x_vel = 0
         self.y_vel = 0
         self.timer = 0.0
@@ -75,14 +74,9 @@ class Player(pg.sprite.Sprite):
         state_dict = {"walking_left": self.get_keys,
                       "walking_right": self.get_keys,
                       "walking_up": self.get_keys,
-                      "walking_down": self.get_keys,
-                      "resting": self.resting}
+                      "walking_down": self.get_keys}
 
         return state_dict
-
-    def resting(self):
-        """Called when player is stationary"""
-        pass
 
     def animation(self):
         """Animates the player"""
@@ -99,7 +93,7 @@ class Player(pg.sprite.Sprite):
         """Updates player state"""
         self.current_time = current_time
         self.get_keys()
-        state_function = self.state_dict[self.state]
+        state_function = self.state_dict["walking_down"]
         state_function()
 
     def get_keys(self):
@@ -130,9 +124,6 @@ class Player(pg.sprite.Sprite):
             self.image_list = self.animation_lists["walking_down"]
             self.rect.y += self.y_vel
             self.image = self.animation()
-
-        else:
-            self.state = "resting"
 
 
 class Game(object):
