@@ -4,10 +4,10 @@ import pygame
 BACKGROUND = pygame.image.load('C:/Users/DrMaxipadMD/Pictures/Personal/map.png')
 BACKGROUND_RECT = BACKGROUND.get_rect()
 
-class Digimon(pygame.sprite.Sprite):
+class Player(pygame.sprite.Sprite):
     """Sprite player controls"""
     def __init__(self, startx, starty):
-        super(Digimon, self).__init__()
+        super(Player, self).__init__()
         self.image_dict = self.create_image_dict()
         self.animation_lists = self.create_animation_lists()
         self.image_list = self.animation_lists['walking_down']
@@ -72,7 +72,7 @@ class Digimon(pygame.sprite.Sprite):
 
 
     def create_state_dict(self):
-        """Creates a dictionary of a Digimon's behavior states"""
+        """Creates a dictionary of a player's behavior states"""
         state_dict = {'walking_left': self.walking_left,
                       'walking_right': self.walking_right,
                       'walking_up': self.walking_up,
@@ -82,7 +82,7 @@ class Digimon(pygame.sprite.Sprite):
         return state_dict
 
     def walking_left(self):
-        """Called when Digimon is in a walking state"""
+        """Called when player is in a walking state"""
         if self.direction == 'left':
             self.x_vel = -5
         else:
@@ -94,7 +94,7 @@ class Digimon(pygame.sprite.Sprite):
 
 
     def walking_right(self):
-        """Called when Digimon is in a walking state"""
+        """Called when player is in a walking state"""
         if self.direction == 'right':
             self.x_vel = 5
         else:
@@ -106,7 +106,7 @@ class Digimon(pygame.sprite.Sprite):
 
 
     def walking_up(self):
-        """Called when Digimon is in a walking up state"""
+        """Called when player is in a walking up state"""
         if self.direction == 'up':
             self.y_vel = -5
         else:
@@ -118,7 +118,7 @@ class Digimon(pygame.sprite.Sprite):
 
 
     def walking_down(self):
-        """Called when Digimon is in a walking down state"""
+        """Called when player is in a walking down state"""
         if self.direction == 'down':
             self.y_vel = 5
         else:
@@ -130,12 +130,12 @@ class Digimon(pygame.sprite.Sprite):
 
 
     def resting(self):
-        """Called when Digimon is stationary"""
+        """Called when player is stationary"""
         pass
 
 
     def animation(self):
-        """Animates the Digimon"""
+        """Animates the player"""
         if (self.current_time - self.timer) > 200:
             if self.image_index < (len(self.image_list) - 1):
                 self.image_index += 1
@@ -147,7 +147,7 @@ class Digimon(pygame.sprite.Sprite):
 
 
     def update(self, current_time, keys):
-        """Updates Digimon state"""
+        """Updates player state"""
         self.current_time = current_time
         self.handle_input(keys)
         state_function = self.state_dict[self.state]
@@ -177,7 +177,7 @@ class Game(object):
     def __init__(self):
         self.screen = self.setup_pygame()
         self.screen_rect = self.screen.get_rect()
-        self.digimon_group = self.create_digimon()
+        self.player_group = self.create_player()
         self.clock = pygame.time.Clock()
         self.fps = 60
         self.done = False
@@ -194,11 +194,11 @@ class Game(object):
         return screen
 
 
-    def create_digimon(self):
-        """Creates a digimon to control"""
+    def create_player(self):
+        """Creates a player to control"""
         sprite_group = pygame.sprite.Group()
-        digimon = Digimon(100, 500)
-        sprite_group.add(digimon)
+        player = Player(100, 500)
+        sprite_group.add(player)
 
         return sprite_group
 
@@ -208,9 +208,9 @@ class Game(object):
         while not self.done:
             self.current_time = pygame.time.get_ticks()
             self.keys = self.get_user_input()
-            self.digimon_group.update(self.current_time, self.keys)
+            self.player_group.update(self.current_time, self.keys)
             self.screen.blit(BACKGROUND, BACKGROUND_RECT)
-            self.digimon_group.draw(self.screen)
+            self.player_group.draw(self.screen)
             pygame.display.update()
             self.clock.tick(self.fps)
 
