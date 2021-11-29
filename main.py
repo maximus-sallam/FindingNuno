@@ -13,12 +13,13 @@ class Game:
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
-        pg.key.set_repeat(100, 100)
         self.load_data()
 
     def load_data(self):
         game_folder = path.dirname(__file__)
+        img_folder = path.join(game_folder, "img")
         self.map = Map(path.join(game_folder, "map.txt"))
+        self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMAGE))
 
     def new(self):
         # initialize all variables and do all the setup for a new game
