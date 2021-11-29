@@ -3,6 +3,7 @@ import pygame as pg
 BACKGROUND = pg.image.load('C:/Users/DrMaxipadMD/Pictures/Personal/map.png')
 BACKGROUND_RECT = BACKGROUND.get_rect()
 
+
 class Player(pg.sprite.Sprite):
     """Sprite player controls"""
     def __init__(self, x, y):
@@ -18,7 +19,6 @@ class Player(pg.sprite.Sprite):
         self.x_vel = 0
         self.y_vel = 0
         self.timer = 0.0
-
 
     def create_image_dict(self):
         """Creates a dictionary for all images"""
@@ -54,7 +54,6 @@ class Player(pg.sprite.Sprite):
 
         return image_dict
 
-
     def create_animation_lists(self):
         """Creates the different lists of images for animation"""
         image_dict = self.image_dict
@@ -70,7 +69,6 @@ class Player(pg.sprite.Sprite):
                           'walking_down': walk_down_list}
 
         return animation_dict
-
 
     def create_state_dict(self):
         """Creates a dictionary of a player's behavior states"""
@@ -91,7 +89,6 @@ class Player(pg.sprite.Sprite):
         self.rect.x += self.x_vel
         self.image = self.animation()
 
-
     def walking_right(self):
         """Called when player is in a walking state"""
         if self.direction == 'right':
@@ -100,7 +97,6 @@ class Player(pg.sprite.Sprite):
         self.image_list = self.animation_lists['walking_right']
         self.rect.x += self.x_vel
         self.image = self.animation()
-
 
     def walking_up(self):
         """Called when player is in a walking up state"""
@@ -111,7 +107,6 @@ class Player(pg.sprite.Sprite):
         self.rect.y += self.y_vel
         self.image = self.animation()
 
-
     def walking_down(self):
         """Called when player is in a walking down state"""
         if self.direction == 'down':
@@ -121,11 +116,9 @@ class Player(pg.sprite.Sprite):
         self.rect.y += self.y_vel
         self.image = self.animation()
 
-
     def resting(self):
         """Called when player is stationary"""
         pass
-
 
     def animation(self):
         """Animates the player"""
@@ -138,14 +131,12 @@ class Player(pg.sprite.Sprite):
 
         return self.image_list[self.image_index]
 
-
     def update(self, current_time, keys):
         """Updates player state"""
         self.current_time = current_time
         self.handle_input(keys)
         state_function = self.state_dict[self.state]
         state_function()
-
 
     def handle_input(self, keys):
         """Handle's user input"""
@@ -186,7 +177,6 @@ class Game(object):
 
         return sprite_group
 
-
     def update(self):
         """Updates entire game"""
         while not self.done:
@@ -197,7 +187,6 @@ class Game(object):
             self.player_group.draw(self.screen)
             pg.display.update()
             self.clock.tick(self.fps)
-
 
     def get_user_input(self):
         """Get's user events and keys pressed"""
