@@ -25,7 +25,7 @@ class Game(object):
         self.player_image_right = pg.image.load(path.join(img_folder, PLAYER_IMAGE_RIGHT))
 
     def new(self):
-        # initialize all variables and do all the setup for a new game
+        # initialize all variables and does all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         for row, tiles in enumerate(self.map.data):
