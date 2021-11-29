@@ -1,5 +1,4 @@
 import pygame as pg
-import glob
 from settings import *
 vec = pg.math.Vector2
 moving_up = ["img/player_03.png", "img/player_04.png"]

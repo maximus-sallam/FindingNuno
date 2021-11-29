@@ -5,14 +5,14 @@ BACKGROUND_RECT = BACKGROUND.get_rect()
 
 class Player(pg.sprite.Sprite):
     """Sprite player controls"""
-    def __init__(self, startx, starty):
+    def __init__(self, x, y):
         super(Player, self).__init__()
         self.image_dict = self.create_image_dict()
         self.animation_lists = self.create_animation_lists()
         self.image_list = self.animation_lists['walking_down']
         self.image_index = 0
         self.image = self.image_list[self.image_index]
-        self.rect = self.image.get_rect(x=startx, y=starty)
+        self.rect = self.image.get_rect(x=x, y=y)
         self.state_dict = self.create_state_dict()
         self.state = 'resting'
         self.x_vel = 0
@@ -85,9 +85,7 @@ class Player(pg.sprite.Sprite):
     def walking_left(self):
         """Called when player is in a walking state"""
         if self.direction == 'left':
-            self.x_vel = -5
-        else:
-            self.x_vel = 5
+            self.x_vel = -2.5
 
         self.image_list = self.animation_lists['walking_left']
         self.rect.x += self.x_vel
@@ -97,9 +95,7 @@ class Player(pg.sprite.Sprite):
     def walking_right(self):
         """Called when player is in a walking state"""
         if self.direction == 'right':
-            self.x_vel = 5
-        else:
-            self.x_vel = 5
+            self.x_vel = 2.5
 
         self.image_list = self.animation_lists['walking_right']
         self.rect.x += self.x_vel
@@ -109,9 +105,7 @@ class Player(pg.sprite.Sprite):
     def walking_up(self):
         """Called when player is in a walking up state"""
         if self.direction == 'up':
-            self.y_vel = -5
-        else:
-            self.y_vel = 5
+            self.y_vel = -2.5
 
         self.image_list = self.animation_lists['walking_up']
         self.rect.y += self.y_vel
@@ -121,9 +115,7 @@ class Player(pg.sprite.Sprite):
     def walking_down(self):
         """Called when player is in a walking down state"""
         if self.direction == 'down':
-            self.y_vel = 5
-        else:
-            self.y_vel = 5
+            self.y_vel = 2.5
 
         self.image_list = self.animation_lists['walking_down']
         self.rect.y += self.y_vel
