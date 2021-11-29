@@ -1,13 +1,18 @@
 import pygame as pg
+import glob
 from settings import *
 vec = pg.math.Vector2
+moving_up = ["img/player_03.png", "img/player_04.png"]
+moving_down = ["img/player_01.png", "img/player_24.png"]
+moving_left = ["img/player_15.png", "img/player_16.png"]
+moving_right = ["img/player_12.png", "img/player_13.png"]
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = game.player_img
+        self.image = game.player_image_down
         self.rect = self.image.get_rect()
         self.vel = vec(0, 0)
         self.pos = vec(x, y) * TILESIZE
@@ -15,14 +20,23 @@ class Player(pg.sprite.Sprite):
     def get_keys(self):
         self.vel = vec(0, 0)
         keys = pg.key.get_pressed()
+
         if keys[pg.K_LEFT] or keys[pg.K_a]:
+            self.image = self.game.player_image_left
             self.vel.x = -PLAYER_SPEED
+
         if keys[pg.K_RIGHT] or keys[pg.K_d]:
+            self.image = self.game.player_image_right
             self.vel.x = PLAYER_SPEED
+
         if keys[pg.K_UP] or keys[pg.K_w]:
+            self.image = self.game.player_image_up
             self.vel.y = -PLAYER_SPEED
+
         if keys[pg.K_DOWN] or keys[pg.K_s]:
+            self.image = self.game.player_image_down
             self.vel.y = PLAYER_SPEED
+
         if self.vel.x != 0 and self.vel.y != 0:
             self.vel *= 0.7071
 
