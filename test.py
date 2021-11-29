@@ -177,6 +177,9 @@ class Game(object):
 
         return sprite_group
 
+    def quit(self):
+        pg.quit()
+
     def update(self):
         """Updates entire game"""
         while self.playing:
