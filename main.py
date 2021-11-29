@@ -22,9 +22,6 @@ class Game(object):
         self.wall_image = pg.image.load(path.join(img_folder, WALL_IMAGE))
         self.wall_image = pg.transform.scale(self.wall_image, (TILESIZE, TILESIZE))
         self.player_image_down = pg.image.load(path.join(img_folder, PLAYER_IMAGE_DOWN))
-        self.player_image_up = pg.image.load(path.join(img_folder, PLAYER_IMAGE_UP))
-        self.player_image_left = pg.image.load(path.join(img_folder, PLAYER_IMAGE_LEFT))
-        self.player_image_right = pg.image.load(path.join(img_folder, PLAYER_IMAGE_RIGHT))
 
     def new(self):
         # initialize all variables and does all the setup for a new game
