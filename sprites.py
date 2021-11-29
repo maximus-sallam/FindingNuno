@@ -17,6 +17,66 @@ class Player(pg.sprite.Sprite):
         self.vel = vec(0, 0)
         self.pos = vec(x, y) * TILESIZE
 
+    def create_image_dict(self):
+        """Creates a dictionary for all images"""
+
+        walk_left_1 = pg.image.load("img/player_14.png")
+        walk_left_2 = pg.image.load("img/player_15.png")
+        walk_left_3 = pg.image.load("img/player_16.png")
+
+        walk_right_1 = pg.image.load("img/player_11.png")
+        walk_right_2 = pg.image.load("img/player_12.png")
+        walk_right_3 = pg.image.load("img/player_13.png")
+
+        walk_up_1 = pg.image.load("img/player_02.png")
+        walk_up_2 = pg.image.load("img/player_03.png")
+        walk_up_3 = pg.image.load("img/player_04.png")
+
+        walk_down_1 = pg.image.load("img/player_23.png")
+        walk_down_2 = pg.image.load("img/player_24.png")
+        walk_down_3 = pg.image.load("img/player_01.png")
+
+        image_dict = {'walk_left_1': walk_left_1,
+                      'walk_left_2': walk_left_2,
+                      'walk_left_3': walk_left_3,
+                      'walk_right_1': walk_right_1,
+                      'walk_right_2': walk_right_2,
+                      'walk_right_3': walk_right_3,
+                      'walk_up_1': walk_up_1,
+                      'walk_up_2': walk_up_2,
+                      'walk_up_3': walk_up_3,
+                      'walk_down_1': walk_down_1,
+                      'walk_down_2': walk_down_2,
+                      'walk_down_3': walk_down_3}
+
+        return image_dict
+
+    def create_animation_lists(self):
+        """Creates the different lists of images for animation"""
+        image_dict = self.image_dict
+
+        walk_left_list = [image_dict['walk_left_1'], image_dict['walk_left_2'], image_dict['walk_left_3']]
+        walk_right_list = [image_dict['walk_right_1'], image_dict['walk_right_2'], image_dict['walk_right_3']]
+        walk_up_list = [image_dict['walk_up_1'], image_dict['walk_up_2'], image_dict['walk_up_3']]
+        walk_down_list = [image_dict['walk_down_1'], image_dict['walk_down_2'], image_dict['walk_down_3']]
+
+        animation_dict = {'walking_left': walk_left_list,
+                          'walking_right': walk_right_list,
+                          'walking_up': walk_up_list,
+                          'walking_down': walk_down_list}
+
+        return animation_dict
+
+    def create_state_dict(self):
+        """Creates a dictionary of a player's behavior states"""
+        state_dict = {'walking_left': self.walking_left,
+                      'walking_right': self.walking_right,
+                      'walking_up': self.walking_up,
+                      'walking_down': self.walking_down,
+                      'resting': self.resting}
+
+        return state_dict
+
     def get_keys(self):
         """Handle's user input"""
         self.vel = vec(0, 0)
