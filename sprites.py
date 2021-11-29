@@ -7,6 +7,7 @@ moving_left = ["img/player_15.png", "img/player_16.png"]
 moving_right = ["img/player_12.png", "img/player_13.png"]
 
 class Player(pg.sprite.Sprite):
+    """Sprite player controls"""
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
@@ -17,6 +18,7 @@ class Player(pg.sprite.Sprite):
         self.pos = vec(x, y) * TILESIZE
 
     def get_keys(self):
+        """Handle's user input"""
         self.vel = vec(0, 0)
         keys = pg.key.get_pressed()
 
@@ -60,6 +62,7 @@ class Player(pg.sprite.Sprite):
                 self.rect.y = self.pos.y
 
     def update(self):
+        """Updates entire game"""
         self.get_keys()
         self.pos += self.vel * self.game.dt
         self.rect.x = self.pos.x

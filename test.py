@@ -1,6 +1,6 @@
 import pygame as pg
 
-BACKGROUND = pg.image.load('C:/Users/DrMaxipadMD/Pictures/Personal/map.png')
+BACKGROUND = pg.image.load('img/map.png')
 BACKGROUND_RECT = BACKGROUND.get_rect()
 
 
@@ -199,6 +199,7 @@ class Game(object):
         return keys
 
 
+# create the game object
 if __name__ == '__main__':
     game = Game()
     game.update()

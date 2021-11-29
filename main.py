@@ -6,6 +6,7 @@ from tilemap import *
 
 
 class Game(object):
+    """Controls entire game"""
     def __init__(self):
         pg.init()
         pg.display.set_caption(TITLE)
@@ -47,6 +48,7 @@ class Game(object):
         pg.quit()
 
     def update(self):
+        """Updates entire game"""
         # update portion of the game loop
         self.all_sprites.update()
         self.camera.update(self.player)
@@ -65,7 +67,7 @@ class Game(object):
         pg.display.flip()
 
     def events(self):
-        # catch all events here
+        """Get's user events and keys pressed"""
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.quit()
