@@ -1,6 +1,6 @@
 import pygame as pg
 
-BACKGROUND = pg.image.load('img/map.png')
+BACKGROUND = pg.image.load("img/map.png")
 BACKGROUND_RECT = BACKGROUND.get_rect()
 
 
@@ -10,12 +10,12 @@ class Player(pg.sprite.Sprite):
         super(Player, self).__init__()
         self.image_dict = self.create_image_dict()
         self.animation_lists = self.create_animation_lists()
-        self.image_list = self.animation_lists['walking_down']
+        self.image_list = self.animation_lists["walking_down"]
         self.image_index = 0
         self.image = self.image_list[self.image_index]
         self.rect = self.image.get_rect(x=x, y=y)
         self.state_dict = self.create_state_dict()
-        self.state = 'resting'
+        self.state = "resting"
         self.x_vel = 0
         self.y_vel = 0
         self.timer = 0.0
@@ -39,18 +39,18 @@ class Player(pg.sprite.Sprite):
         walk_down_2 = pg.image.load("img/player_24.png")
         walk_down_3 = pg.image.load("img/player_01.png")
 
-        image_dict = {'walk_left_1': walk_left_1,
-                      'walk_left_2': walk_left_2,
-                      'walk_left_3': walk_left_3,
-                      'walk_right_1': walk_right_1,
-                      'walk_right_2': walk_right_2,
-                      'walk_right_3': walk_right_3,
-                      'walk_up_1': walk_up_1,
-                      'walk_up_2': walk_up_2,
-                      'walk_up_3': walk_up_3,
-                      'walk_down_1': walk_down_1,
-                      'walk_down_2': walk_down_2,
-                      'walk_down_3': walk_down_3}
+        image_dict = {"walk_left_1": walk_left_1,
+                      "walk_left_2": walk_left_2,
+                      "walk_left_3": walk_left_3,
+                      "walk_right_1": walk_right_1,
+                      "walk_right_2": walk_right_2,
+                      "walk_right_3": walk_right_3,
+                      "walk_up_1": walk_up_1,
+                      "walk_up_2": walk_up_2,
+                      "walk_up_3": walk_up_3,
+                      "walk_down_1": walk_down_1,
+                      "walk_down_2": walk_down_2,
+                      "walk_down_3": walk_down_3}
 
         return image_dict
 
@@ -58,61 +58,61 @@ class Player(pg.sprite.Sprite):
         """Creates the different lists of images for animation"""
         image_dict = self.image_dict
 
-        walk_left_list = [image_dict['walk_left_1'], image_dict['walk_left_2'], image_dict['walk_left_3']]
-        walk_right_list = [image_dict['walk_right_1'], image_dict['walk_right_2'], image_dict['walk_right_3']]
-        walk_up_list = [image_dict['walk_up_1'], image_dict['walk_up_2'], image_dict['walk_up_3']]
-        walk_down_list = [image_dict['walk_down_1'], image_dict['walk_down_2'], image_dict['walk_down_3']]
+        walk_left_list = [image_dict["walk_left_1"], image_dict["walk_left_2"], image_dict["walk_left_3"]]
+        walk_right_list = [image_dict["walk_right_1"], image_dict["walk_right_2"], image_dict["walk_right_3"]]
+        walk_up_list = [image_dict["walk_up_1"], image_dict["walk_up_2"], image_dict["walk_up_3"]]
+        walk_down_list = [image_dict["walk_down_1"], image_dict["walk_down_2"], image_dict["walk_down_3"]]
 
-        animation_dict = {'walking_left': walk_left_list,
-                          'walking_right': walk_right_list,
-                          'walking_up': walk_up_list,
-                          'walking_down': walk_down_list}
+        animation_dict = {"walking_left": walk_left_list,
+                          "walking_right": walk_right_list,
+                          "walking_up": walk_up_list,
+                          "walking_down": walk_down_list}
 
         return animation_dict
 
     def create_state_dict(self):
-        """Creates a dictionary of a player's behavior states"""
-        state_dict = {'walking_left': self.walking_left,
-                      'walking_right': self.walking_right,
-                      'walking_up': self.walking_up,
-                      'walking_down': self.walking_down,
-                      'resting': self.resting}
+        """Creates a dictionary of a player"s behavior states"""
+        state_dict = {"walking_left": self.walking_left,
+                      "walking_right": self.walking_right,
+                      "walking_up": self.walking_up,
+                      "walking_down": self.walking_down,
+                      "resting": self.resting}
 
         return state_dict
 
     def walking_left(self):
         """Called when player is in a walking state"""
-        if self.direction == 'left':
+        if self.direction == "left":
             self.x_vel = -2.5
 
-        self.image_list = self.animation_lists['walking_left']
+        self.image_list = self.animation_lists["walking_left"]
         self.rect.x += self.x_vel
         self.image = self.animation()
 
     def walking_right(self):
         """Called when player is in a walking state"""
-        if self.direction == 'right':
+        if self.direction == "right":
             self.x_vel = 2.5
 
-        self.image_list = self.animation_lists['walking_right']
+        self.image_list = self.animation_lists["walking_right"]
         self.rect.x += self.x_vel
         self.image = self.animation()
 
     def walking_up(self):
         """Called when player is in a walking up state"""
-        if self.direction == 'up':
+        if self.direction == "up":
             self.y_vel = -2.5
 
-        self.image_list = self.animation_lists['walking_up']
+        self.image_list = self.animation_lists["walking_up"]
         self.rect.y += self.y_vel
         self.image = self.animation()
 
     def walking_down(self):
         """Called when player is in a walking down state"""
-        if self.direction == 'down':
+        if self.direction == "down":
             self.y_vel = 2.5
 
-        self.image_list = self.animation_lists['walking_down']
+        self.image_list = self.animation_lists["walking_down"]
         self.rect.y += self.y_vel
         self.image = self.animation()
 
@@ -139,35 +139,35 @@ class Player(pg.sprite.Sprite):
         state_function()
 
     def get_keys(self):
-        """Handle's user input"""
+        """Handle"s user input"""
 
         keys = pg.key.get_pressed()
 
         if keys[pg.K_UP] or keys[pg.K_w]:
-            self.state = 'walking_up'
-            self.direction = 'up'
+            self.state = "walking_up"
+            self.direction = "up"
 
         elif keys[pg.K_RIGHT] or keys[pg.K_d]:
-            self.state = 'walking_right'
-            self.direction = 'right'
+            self.state = "walking_right"
+            self.direction = "right"
 
         elif keys[pg.K_LEFT] or keys[pg.K_a]:
-            self.state = 'walking_left'
-            self.direction = 'left'
+            self.state = "walking_left"
+            self.direction = "left"
 
         elif keys[pg.K_DOWN] or keys[pg.K_s]:
-            self.state = 'walking_down'
-            self.direction = 'down'
+            self.state = "walking_down"
+            self.direction = "down"
 
         else:
-            self.state = 'resting'
+            self.state = "resting"
 
 
 class Game(object):
     """Controls entire game"""
     def __init__(self):
         pg.init()
-        pg.display.set_caption('Walking Demo')
+        pg.display.set_caption("Walking Demo")
         self.screen = pg.display.set_mode((800, 600))
         self.screen_rect = self.screen.get_rect()
         self.player_group = self.create_player()
@@ -202,14 +202,14 @@ class Game(object):
             self.clock.tick(self.fps)
 
     def events(self):
-        """Get's user events and keys pressed"""
+        """Get"s user events and keys pressed"""
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.quit()
 
 
 # create the game object
-if __name__ == '__main__':
+if __name__ == "__main__":
     game = Game()
     game.update()
     pg.quit()
