@@ -70,8 +70,7 @@ class Player(pg.sprite.Sprite):
         state_dict = {"walking_left": self.get_keys,
                       "walking_right": self.get_keys,
                       "walking_up": self.get_keys,
-                      "walking_down": self.get_keys,
-                      'resting': self.resting}
+                      "walking_down": self.get_keys}
 
         return state_dict
 
