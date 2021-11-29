@@ -177,6 +177,9 @@ class Game(object):
 
         return sprite_group
 
+    def run(self):
+        pass
+
     def quit(self):
         pg.quit()
 

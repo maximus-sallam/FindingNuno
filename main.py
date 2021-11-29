@@ -12,7 +12,6 @@ class Game(object):
         pg.display.set_caption(TITLE)
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         self.clock = pg.time.Clock()
-        self.fps = 60
         self.current_time = 0.0
         self.load_data()
 
@@ -41,6 +40,7 @@ class Game(object):
         # game loop - set self.playing = False to end the game
         self.playing = True
         while self.playing:
+            self.current_time = pg.time.get_ticks()
             self.dt = self.clock.tick(FPS) / 1000
             self.events()
             self.update()
@@ -51,7 +51,6 @@ class Game(object):
 
     def update(self):
         """Updates entire game"""
-        # update portion of the game loop
         self.all_sprites.update()
         self.camera.update(self.player)
 
