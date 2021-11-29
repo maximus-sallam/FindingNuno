@@ -166,7 +166,7 @@ class Game(object):
         self.player_group = self.create_player()
         self.clock = pg.time.Clock()
         self.fps = 60
-        self.done = False
+        self.playing = True
         self.current_time = 0.0
 
     def create_player(self):
@@ -179,7 +179,7 @@ class Game(object):
 
     def update(self):
         """Updates entire game"""
-        while not self.done:
+        while self.playing:
             self.current_time = pg.time.get_ticks()
             self.keys = self.get_user_input()
             self.player_group.update(self.current_time, self.keys)
@@ -192,7 +192,7 @@ class Game(object):
         """Get's user events and keys pressed"""
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                self.done = True
+                self.quit()
 
         keys = pg.key.get_pressed()
 
