@@ -172,7 +172,7 @@ class Game(object):
     def create_player(self):
         """Creates a player to control"""
         sprite_group = pg.sprite.Group()
-        player = Player(100, 500)
+        player = Player(500, 500)
         sprite_group.add(player)
 
         return sprite_group
