@@ -9,7 +9,6 @@ class Game(object):
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
-        self.background = pg.image.load(BACKGROUND)
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.load_data()
