@@ -11,6 +11,7 @@ class Game(object):
         pg.init()
         pg.display.set_caption(TITLE)
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.current_time = 0.0
         self.load_data()
