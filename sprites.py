@@ -122,6 +122,21 @@ class Player(pg.sprite.Sprite):
                 self.vel.y = 0
                 self.rect.y = self.pos.y
 
+    def resting(self):
+        """Called when player is stationary"""
+        pass
+
+    def animation(self):
+        """Animates the player"""
+        if (self.current_time - self.timer) > 200:
+            if self.image_index < (len(self.image_list) - 1):
+                self.image_index += 1
+            else:
+                self.image_index = 0
+            self.timer = self.current_time
+
+        return self.image_list[self.image_index]
+
     def update(self):
         """Updates entire game"""
         self.get_keys()
