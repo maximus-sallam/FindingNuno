@@ -27,16 +27,18 @@ class Player(pygame.sprite.Sprite):
         walk_left_1 = pygame.image.load("img/player_14.png")
         walk_left_2 = pygame.image.load("img/player_15.png")
         walk_left_3 = pygame.image.load("img/player_16.png")
+
         walk_right_1 = pygame.image.load("img/player_11.png")
         walk_right_2 = pygame.image.load("img/player_12.png")
         walk_right_3 = pygame.image.load("img/player_13.png")
+
         walk_up_1 = pygame.image.load("img/player_02.png")
         walk_up_2 = pygame.image.load("img/player_03.png")
         walk_up_3 = pygame.image.load("img/player_04.png")
+
         walk_down_1 = pygame.image.load("img/player_23.png")
         walk_down_2 = pygame.image.load("img/player_24.png")
         walk_down_3 = pygame.image.load("img/player_01.png")
-
 
         image_dict = {'walk_left_1': walk_left_1,
                       'walk_left_2': walk_left_2,
