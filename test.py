@@ -143,7 +143,7 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_UP] or keys[pg.K_w]:
             self.state = 'walking_up'
             self.direction = 'up'
-        elif  keys[pg.K_RIGHT] or keys[pg.K_d]:
+        elif keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.state = 'walking_right'
             self.direction = 'right'
         elif keys[pg.K_LEFT] or keys[pg.K_a]:
