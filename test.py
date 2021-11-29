@@ -131,27 +131,34 @@ class Player(pg.sprite.Sprite):
 
         return self.image_list[self.image_index]
 
-    def update(self, current_time, keys):
+    def update(self, current_time):
         """Updates player state"""
         self.current_time = current_time
-        self.handle_input(keys)
+        self.handle_input()
         state_function = self.state_dict[self.state]
         state_function()
 
-    def handle_input(self, keys):
+    def handle_input(self):
         """Handle's user input"""
+
+        keys = pg.key.get_pressed()
+
         if keys[pg.K_UP] or keys[pg.K_w]:
             self.state = 'walking_up'
             self.direction = 'up'
+
         elif keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.state = 'walking_right'
             self.direction = 'right'
+
         elif keys[pg.K_LEFT] or keys[pg.K_a]:
             self.state = 'walking_left'
             self.direction = 'left'
+
         elif keys[pg.K_DOWN] or keys[pg.K_s]:
             self.state = 'walking_down'
             self.direction = 'down'
+
         else:
             self.state = 'resting'
 
@@ -187,22 +194,18 @@ class Game(object):
         """Updates entire game"""
         while self.playing:
             self.current_time = pg.time.get_ticks()
-            self.keys = self.get_user_input()
-            self.player_group.update(self.current_time, self.keys)
+            self.player_group.update(self.current_time)
             self.screen.blit(BACKGROUND, BACKGROUND_RECT)
             self.player_group.draw(self.screen)
             pg.display.update()
+            self.events()
             self.clock.tick(self.fps)
 
-    def get_user_input(self):
+    def events(self):
         """Get's user events and keys pressed"""
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.quit()
-
-        keys = pg.key.get_pressed()
-
-        return keys
 
 
 # create the game object
