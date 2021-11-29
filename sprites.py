@@ -12,6 +12,7 @@ class Player(pg.sprite.Sprite):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
+        self.image_index = 0
         self.image = game.player_image_down
         self.rect = self.image.get_rect()
         self.vel = vec(0, 0)
