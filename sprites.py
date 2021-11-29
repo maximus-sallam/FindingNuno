@@ -67,10 +67,10 @@ class Player(pg.sprite.Sprite):
 
     def create_state_dict(self):
         """Creates a dictionary of a player's behavior states"""
-        state_dict = {'walking_left': self.walking_left,
-                      'walking_right': self.walking_right,
-                      'walking_up': self.walking_up,
-                      'walking_down': self.walking_down,
+        state_dict = {"walking_left": self.get_keys,
+                      "walking_right": self.get_keys,
+                      "walking_up": self.get_keys,
+                      "walking_down": self.get_keys,
                       'resting': self.resting}
 
         return state_dict
@@ -118,10 +118,6 @@ class Player(pg.sprite.Sprite):
                     self.pos.y = hits[0].rect.bottom
                 self.vel.y = 0
                 self.rect.y = self.pos.y
-
-    def resting(self):
-        """Called when player is stationary"""
-        pass
 
     def animation(self):
         """Animates the player"""

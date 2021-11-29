@@ -72,49 +72,13 @@ class Player(pg.sprite.Sprite):
 
     def create_state_dict(self):
         """Creates a dictionary of a player"s behavior states"""
-        state_dict = {"walking_left": self.walking_left,
-                      "walking_right": self.walking_right,
-                      "walking_up": self.walking_up,
-                      "walking_down": self.walking_down,
+        state_dict = {"walking_left": self.get_keys,
+                      "walking_right": self.get_keys,
+                      "walking_up": self.get_keys,
+                      "walking_down": self.get_keys,
                       "resting": self.resting}
 
         return state_dict
-
-    def walking_left(self):
-        """Called when player is in a walking state"""
-        if self.direction == "left":
-            self.x_vel = -2.5
-
-        self.image_list = self.animation_lists["walking_left"]
-        self.rect.x += self.x_vel
-        self.image = self.animation()
-
-    def walking_right(self):
-        """Called when player is in a walking state"""
-        if self.direction == "right":
-            self.x_vel = 2.5
-
-        self.image_list = self.animation_lists["walking_right"]
-        self.rect.x += self.x_vel
-        self.image = self.animation()
-
-    def walking_up(self):
-        """Called when player is in a walking up state"""
-        if self.direction == "up":
-            self.y_vel = -2.5
-
-        self.image_list = self.animation_lists["walking_up"]
-        self.rect.y += self.y_vel
-        self.image = self.animation()
-
-    def walking_down(self):
-        """Called when player is in a walking down state"""
-        if self.direction == "down":
-            self.y_vel = 2.5
-
-        self.image_list = self.animation_lists["walking_down"]
-        self.rect.y += self.y_vel
-        self.image = self.animation()
 
     def resting(self):
         """Called when player is stationary"""
@@ -144,20 +108,28 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
 
         if keys[pg.K_UP] or keys[pg.K_w]:
-            self.state = "walking_up"
-            self.direction = "up"
+            self.y_vel = -2.5
+            self.image_list = self.animation_lists["walking_up"]
+            self.rect.y += self.y_vel
+            self.image = self.animation()
 
         elif keys[pg.K_RIGHT] or keys[pg.K_d]:
-            self.state = "walking_right"
-            self.direction = "right"
+            self.x_vel = 2.5
+            self.image_list = self.animation_lists["walking_right"]
+            self.rect.x += self.x_vel
+            self.image = self.animation()
 
         elif keys[pg.K_LEFT] or keys[pg.K_a]:
-            self.state = "walking_left"
-            self.direction = "left"
+            self.x_vel = -2.5
+            self.image_list = self.animation_lists["walking_left"]
+            self.rect.x += self.x_vel
+            self.image = self.animation()
 
         elif keys[pg.K_DOWN] or keys[pg.K_s]:
-            self.state = "walking_down"
-            self.direction = "down"
+            self.y_vel = 2.5
+            self.image_list = self.animation_lists["walking_down"]
+            self.rect.y += self.y_vel
+            self.image = self.animation()
 
         else:
             self.state = "resting"
