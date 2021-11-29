@@ -1,7 +1,5 @@
 import ntpath as path
 import pygame as pg
-import sys
-import tilemap
 from settings import *
 from sprites import *
 from tilemap import *
@@ -49,7 +47,6 @@ class Game(object):
 
     def quit(self):
         pg.quit()
-        sys.exit()
 
     def update(self):
         # update portion of the game loop
