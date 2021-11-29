@@ -93,8 +93,6 @@ class Player(pg.sprite.Sprite):
         """Updates player state"""
         self.current_time = current_time
         self.get_keys()
-        state_function = self.state_dict["walking_down"]
-        state_function()
 
     def get_keys(self):
         """Handle"s user input"""
