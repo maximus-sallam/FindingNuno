@@ -135,7 +135,7 @@ class Player(pg.sprite.Sprite):
         return self.image_list[self.image_index]
 
     def update(self):
-        """Updates entire game"""
+        """Updates player state"""
         self.get_keys()
         self.pos += self.vel * self.game.dt
         self.rect.x = self.pos.x
