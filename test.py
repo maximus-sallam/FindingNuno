@@ -1,10 +1,9 @@
-import sys, os
-import pygame
+import pygame as pg
 
-BACKGROUND = pygame.image.load('C:/Users/DrMaxipadMD/Pictures/Personal/map.png')
+BACKGROUND = pg.image.load('C:/Users/DrMaxipadMD/Pictures/Personal/map.png')
 BACKGROUND_RECT = BACKGROUND.get_rect()
 
-class Player(pygame.sprite.Sprite):
+class Player(pg.sprite.Sprite):
     """Sprite player controls"""
     def __init__(self, startx, starty):
         super(Player, self).__init__()
@@ -24,21 +23,21 @@ class Player(pygame.sprite.Sprite):
     def create_image_dict(self):
         """Creates a dictionary for all images"""
 
-        walk_left_1 = pygame.image.load("img/player_14.png")
-        walk_left_2 = pygame.image.load("img/player_15.png")
-        walk_left_3 = pygame.image.load("img/player_16.png")
+        walk_left_1 = pg.image.load("img/player_14.png")
+        walk_left_2 = pg.image.load("img/player_15.png")
+        walk_left_3 = pg.image.load("img/player_16.png")
 
-        walk_right_1 = pygame.image.load("img/player_11.png")
-        walk_right_2 = pygame.image.load("img/player_12.png")
-        walk_right_3 = pygame.image.load("img/player_13.png")
+        walk_right_1 = pg.image.load("img/player_11.png")
+        walk_right_2 = pg.image.load("img/player_12.png")
+        walk_right_3 = pg.image.load("img/player_13.png")
 
-        walk_up_1 = pygame.image.load("img/player_02.png")
-        walk_up_2 = pygame.image.load("img/player_03.png")
-        walk_up_3 = pygame.image.load("img/player_04.png")
+        walk_up_1 = pg.image.load("img/player_02.png")
+        walk_up_2 = pg.image.load("img/player_03.png")
+        walk_up_3 = pg.image.load("img/player_04.png")
 
-        walk_down_1 = pygame.image.load("img/player_23.png")
-        walk_down_2 = pygame.image.load("img/player_24.png")
-        walk_down_3 = pygame.image.load("img/player_01.png")
+        walk_down_1 = pg.image.load("img/player_23.png")
+        walk_down_2 = pg.image.load("img/player_24.png")
+        walk_down_3 = pg.image.load("img/player_01.png")
 
         image_dict = {'walk_left_1': walk_left_1,
                       'walk_left_2': walk_left_2,
@@ -158,16 +157,16 @@ class Player(pygame.sprite.Sprite):
 
     def handle_input(self, keys):
         """Handle's user input"""
-        if keys[pygame.K_UP]:
+        if keys[pg.K_UP]:
             self.state = 'walking_up'
             self.direction = 'up'
-        elif keys[pygame.K_RIGHT]:
+        elif keys[pg.K_RIGHT]:
             self.state = 'walking_right'
             self.direction = 'right'
-        elif keys[pygame.K_LEFT]:
+        elif keys[pg.K_LEFT]:
             self.state = 'walking_left'
             self.direction = 'left'
-        elif keys[pygame.K_DOWN]:
+        elif keys[pg.K_DOWN]:
             self.state = 'walking_down'
             self.direction = 'down'
         else:
@@ -180,7 +179,7 @@ class Game(object):
         self.screen = self.setup_pygame()
         self.screen_rect = self.screen.get_rect()
         self.player_group = self.create_player()
-        self.clock = pygame.time.Clock()
+        self.clock = pg.time.Clock()
         self.fps = 60
         self.done = False
         self.current_time = 0.0
@@ -188,17 +187,16 @@ class Game(object):
 
     def setup_pygame(self):
         """Initializes pygame and produces a surface to blit on"""
-        os.environ['SDL_VIDEO_CENTERED'] = '1'
-        pygame.init()
-        pygame.display.set_caption('Walking Demo')
-        screen = pygame.display.set_mode((800, 600))
+        pg.init()
+        pg.display.set_caption('Walking Demo')
+        screen = pg.display.set_mode((800, 600))
 
         return screen
 
 
     def create_player(self):
         """Creates a player to control"""
-        sprite_group = pygame.sprite.Group()
+        sprite_group = pg.sprite.Group()
         player = Player(100, 500)
         sprite_group.add(player)
 
@@ -208,22 +206,22 @@ class Game(object):
     def update(self):
         """Updates entire game"""
         while not self.done:
-            self.current_time = pygame.time.get_ticks()
+            self.current_time = pg.time.get_ticks()
             self.keys = self.get_user_input()
             self.player_group.update(self.current_time, self.keys)
             self.screen.blit(BACKGROUND, BACKGROUND_RECT)
             self.player_group.draw(self.screen)
-            pygame.display.update()
+            pg.display.update()
             self.clock.tick(self.fps)
 
 
     def get_user_input(self):
         """Get's user events and keys pressed"""
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
                 self.done = True
 
-        keys = pygame.key.get_pressed()
+        keys = pg.key.get_pressed()
 
         return keys
 
@@ -231,5 +229,4 @@ class Game(object):
 if __name__ == '__main__':
     game = Game()
     game.update()
-    pygame.quit()
-    sys.exit()
+    pg.quit()

@@ -7,7 +7,7 @@ from sprites import *
 from tilemap import *
 
 
-class Game:
+class Game(object):
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
