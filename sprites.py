@@ -1,10 +1,7 @@
 import pygame as pg
 from settings import *
 vec = pg.math.Vector2
-moving_up = ["img/player_03.png", "img/player_04.png"]
-moving_down = ["img/player_01.png", "img/player_24.png"]
-moving_left = ["img/player_15.png", "img/player_16.png"]
-moving_right = ["img/player_12.png", "img/player_13.png"]
+
 
 class Player(pg.sprite.Sprite):
     """Sprite player controls"""
