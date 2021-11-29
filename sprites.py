@@ -8,12 +8,20 @@ class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
+        self.image_dict = self.create_image_dict()
+        self.animation_lists = self.create_animation_lists()
+        self.image_list = self.animation_lists["walking_down"]
+        self.image_index = 0
+        self.image = self.image_list[self.image_index]
+        self.state_dict = self.create_state_dict()
         self.game = game
         self.image_index = 0
         self.image = game.player_image_down
         self.rect = self.image.get_rect()
         self.vel = vec(0, 0)
         self.pos = vec(x, y) * TILESIZE
+        self.current_time = 0.0
+        self.timer = 0.0
 
     def create_image_dict(self):
         """Creates a dictionary for all images"""
@@ -80,20 +88,24 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
 
         if keys[pg.K_LEFT] or keys[pg.K_a]:
-            self.image = self.game.player_image_left
             self.vel.x = -PLAYER_SPEED
+            self.image_list = self.animation_lists["walking_left"]
+            self.image = self.animation()
 
         elif keys[pg.K_RIGHT] or keys[pg.K_d]:
-            self.image = self.game.player_image_right
             self.vel.x = PLAYER_SPEED
+            self.image_list = self.animation_lists["walking_right"]
+            self.image = self.animation()
 
         elif keys[pg.K_UP] or keys[pg.K_w]:
-            self.image = self.game.player_image_up
             self.vel.y = -PLAYER_SPEED
+            self.image_list = self.animation_lists["walking_up"]
+            self.image = self.animation()
 
         elif keys[pg.K_DOWN] or keys[pg.K_s]:
-            self.image = self.game.player_image_down
             self.vel.y = PLAYER_SPEED
+            self.image_list = self.animation_lists["walking_down"]
+            self.image = self.animation()
 
 #        if self.vel.x != 0 and self.vel.y != 0:
 #            self.vel *= 0.7071
@@ -132,6 +144,7 @@ class Player(pg.sprite.Sprite):
     def update(self):
         """Updates player state"""
         self.get_keys()
+        self.current_time = pg.time.get_ticks()
         self.pos += self.vel * self.game.dt
         self.rect.x = self.pos.x
         self.collide_with_walls("x")
