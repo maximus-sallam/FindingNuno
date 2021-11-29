@@ -12,6 +12,8 @@ class Game(object):
         pg.display.set_caption(TITLE)
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         self.clock = pg.time.Clock()
+        self.fps = 60
+        self.current_time = 0.0
         self.load_data()
 
     def load_data(self):
