@@ -19,7 +19,11 @@ class Game(object):
     def load_data(self):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, "img")
-        self.map = Map(path.join(game_folder, "map.txt"))
+        map_folder = path.join(game_folder, "maps")
+        self.map = TiledMap(path.join(map_folder, "FindingNuno.tmx"))
+        self.map_image = self.map.make_map()
+        self.map_rect = self.map_image.get_rect()
+        #self.map = Map(path.join(game_folder, "map.txt"))
         self.wall_image = pg.image.load(path.join(img_folder, WALL_IMAGE))
         self.wall_image = pg.transform.scale(self.wall_image, (TILESIZE, TILESIZE))
         self.player_image_down = pg.image.load(path.join(img_folder, PLAYER_IMAGE_DOWN))
@@ -28,12 +32,13 @@ class Game(object):
         # initialize all variables and does all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
-        for row, tiles in enumerate(self.map.data):
-            for col, tile in enumerate(tiles):
-                if tile == "1":
-                    Wall(self, col, row)
-                if tile == "P":
-                    self.player = Player(self, col, row)
+        #for row, tiles in enumerate(self.map.data):
+        #    for col, tile in enumerate(tiles):
+        #        if tile == "1":
+        #            Wall(self, col, row)
+        #        if tile == "P":
+        #            self.player = Player(self, col, row)
+        self.player = Player(self, 5, 5)
         self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
@@ -61,8 +66,9 @@ class Game(object):
 #            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
 
     def draw(self):
-        self.screen.fill(BGCOLOR)
+#        self.screen.fill(BGCOLOR)
 #        self.draw_grid()
+        self.screen.blit(self.map_image, self.camera.apply_rect(self.map_rect))
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         pg.display.flip()
